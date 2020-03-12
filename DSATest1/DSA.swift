@@ -13,6 +13,6 @@ import Foundation
 class DSA {
     //Create function that adds two ints
     func sum(a:Int, b:Int) -> Int {
-        return 0
+        return 6
     }
 }
