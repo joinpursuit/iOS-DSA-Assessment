@@ -11,6 +11,8 @@ import XCTest
 
 class DSATest: XCTestCase {
 
+    let dsaTest = DSA()
+    
     override func setUp() {
         super.setUp()
     }
@@ -19,8 +21,10 @@ class DSATest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testSum () {
-        XCTAssert(DSA().sum(a: 1, b: 2) == 3, "Incorrect Sum")
+    func testMultiply () {
+        XCTAssert(dsaTest.multiply(x: 5, y: 10) == 50)
+        XCTAssert(dsaTest.multiply(x: 1, y: 235) == 235)
+        XCTAssert(dsaTest.multiply(x: -5, y: 18) == -90)
     }
 
 }
