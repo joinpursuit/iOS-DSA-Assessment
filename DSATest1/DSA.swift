@@ -46,7 +46,7 @@ class DSA {
 
     func multiply(x: Int, y: Int) -> Int {
         
-        return 50
+        return x * y
     }
 
     
