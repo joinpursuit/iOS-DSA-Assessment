@@ -22,8 +22,8 @@ class DSATest: XCTestCase {
     }
 
     func testMultiply () {
-        XCTAssert(dsaTest.multiply(x: 5, y: 10) == 50)
-        XCTAssert(dsaTest.multiply(x: 1, y: 235) == 235)
+        XCTAssert(dsaTest.multiply(x: 5, y: 10) == 50, "5 * 10 = 50")
+        XCTAssert(dsaTest.multiply(x: 1, y: 235) == 235, "1 * 235 = 235")
         XCTAssert(dsaTest.multiply(x: -5, y: 18) == -90)
     }
 
