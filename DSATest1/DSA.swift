@@ -13,6 +13,7 @@ import Foundation
 class Node {
     var value: Int
     var next: Node?
+    var previous: Node?
     
     init(value: Int) {
         self.value = value
@@ -46,7 +47,7 @@ class DSA {
 
     func multiply(x: Int, y: Int) -> Int {
         
-        return 50
+        return 0
     }
 
     
@@ -55,14 +56,14 @@ class DSA {
     // ex: arraySquare(arr: [1,3,5,8]) should return [1,9,25,64]
 
     func arraySquare(arr:[Int]) -> [Int] {
-        
+    
         return []
     }
 
     // Question 3
     // Given two integers (low and high), return how many numbers are in that range that
     // DO NOT contain the number 5. This includes any number that has a 5, like 15, 352, etc.
-    // ex: integerRange(1, 10) should return 8
+    // ex: integerRange(1, 10) should return 9
     // ex: integerRange(4, 25) should return 19
 
     func integerRange( _ low: Int, _ high: Int) -> Int {
@@ -79,7 +80,7 @@ class DSA {
     // ex: inputSum([1,3,5,4,2], 2) should return false
 
     func inputSum( _ arr: [Int], _ targetInt: Int) -> Bool {
-        
+      
         return false
     }
     
@@ -102,7 +103,6 @@ class DSA {
    
 
     func traverseLinkedList( _ inputList: Node) -> [Int] {
-    
         return []
     }
 
@@ -119,8 +119,7 @@ class DSA {
     //     7   25
     //
 
-    func maxDepth(tree: BinaryNode) -> Int {
-        
+    func maxDepth(tree: BinaryNode?) -> Int {
         return 0
     }
 }
