@@ -47,7 +47,7 @@ class DSA {
 
     func multiply(x: Int, y: Int) -> Int {
         
-        return 0
+        return x * y
     }
 
     
@@ -92,7 +92,7 @@ class DSA {
 
     func recursiveSum( _ input: [Int]) -> Int {
 
-        return 0
+        return input.reduce(0,+)
     }
 
     // Question 6
