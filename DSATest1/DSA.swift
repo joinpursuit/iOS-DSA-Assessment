@@ -77,9 +77,9 @@ class DSA {
     // ex: inputSum([1,3,5,4,2], 2) should return false
 
     func inputSum( _ arr: [Int], _ targetInt: Int) -> Bool {
-        let targetVals = Set<Int>()
+        var targetVals = Set<Int>()
         for val in arr {
-            if targetVals.conatins(val) { return true }
+            if targetVals.contains(val) { return true }
             targetVals.insert(targetInt - val)
         }
         return false
