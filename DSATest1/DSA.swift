@@ -65,7 +65,7 @@ class DSA {
     // ex: integerRange(4, 25) should return 19
 
     func integerRange( _ low: Int, _ high: Int) -> Int {
-        return (low...high).filter { String($0).conatins("5") }.count
+        return (low...high).filter { String($0).contains("5") }.count
     }
     
     
@@ -104,8 +104,8 @@ class DSA {
    
 
     func traverseLinkedList( _ inputList: Node) -> [Int] {
-        guard nextNode = inputList.next else { return [inputList.val] }
-        return [inputList.val] + traverseLinkedList(nextNode)
+        guard let nextNode = inputList.next else { return [inputList.value] }
+        return [inputList.value] + traverseLinkedList(nextNode)
     }
 
     // Question 7
@@ -123,6 +123,6 @@ class DSA {
 
     func maxDepth(tree: BinaryNode?) -> Int {
         guard let tree = tree else { return 0 }
-        return 1 + max(maxDepth(tree.left), maxDepth(tree.right))
+        return 1 + max(maxDepth(tree: tree.left), maxDepth(tree: tree.right))
     }
 }
