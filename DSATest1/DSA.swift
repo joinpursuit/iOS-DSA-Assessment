@@ -65,7 +65,7 @@ class DSA {
     // ex: integerRange(4, 25) should return 19
 
     func integerRange( _ low: Int, _ high: Int) -> Int {
-        return (low...high).filter { String($0).contains("5") }.count
+        return (low...high).filter { !String($0).contains("5") }.count
     }
     
     
