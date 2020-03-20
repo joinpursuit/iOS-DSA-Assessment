@@ -18,7 +18,7 @@ All of the problems have more than 1 test, so you may be able to get partial cre
 
 Solve each of the problems in the `DSA.swift` file. Each problem has its own description directly above it. Read the description and write your code in the empty function.
 
-Run unit testing as often as you want to see how many tests you've passed. You will start off with 0 passing. Read the output of the tests to get information about what you need to do. There is a lot of output!
+Run "test" on xcode as often as you want to see how many tests you've passed. You will start off with 0 passing. Read the output of the tests to get information about what you need to do. There is a lot of output!
 
 You may:
 
