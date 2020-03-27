@@ -20,6 +20,7 @@ class Node {
     }
 }
 
+
 class BinaryNode {
     var value: Int
     var left: BinaryNode?
@@ -46,18 +47,21 @@ class DSA {
     // ex: multiply(x: 5, y: 10) should return 50
 
     func multiply(x: Int, y: Int) -> Int {
-        
-        return 0
+        let product = x * y
+        return product
     }
-
     
+ 
     // Question 2
     // Given an array of integers, return a new array of the same length that contains the original values squared.
     // ex: arraySquare(arr: [1,3,5,8]) should return [1,9,25,64]
 
     func arraySquare(arr:[Int]) -> [Int] {
-    
-        return []
+        var squaredArr = [Int]()
+        for num in arr {
+            squaredArr.append(num * num)
+        }
+        return squaredArr
     }
 
     // Question 3
@@ -67,8 +71,13 @@ class DSA {
     // ex: integerRange(4, 25) should return 19
 
     func integerRange( _ low: Int, _ high: Int) -> Int {
-     
-        return 0
+        var count = 0
+        for number in low...high {
+            if !String(number).contains("5") {
+                count += 1
+            }
+        }
+        return count
     }
     
     
@@ -80,8 +89,21 @@ class DSA {
     // ex: inputSum([1,3,5,4,2], 2) should return false
 
     func inputSum( _ arr: [Int], _ targetInt: Int) -> Bool {
-      
-        return false
+        var targetReached = false
+        for i in 0...arr.count - 1 {
+            for j in 0...arr.count - 1 {
+                if i != j {
+                    if arr[i] + arr[j] == targetInt {
+                        targetReached = true
+                        break
+                    } else {
+                        targetReached = false
+                    }
+                }
+            }
+        }
+        
+        return targetReached
     }
     
     // Question 5
@@ -91,8 +113,8 @@ class DSA {
     // ex: recursiveSum([1,2,3,4,5]) should return 15
 
     func recursiveSum( _ input: [Int]) -> Int {
-
-        return 0
+         guard !input.isEmpty else {return 0}
+          return input.first! + recursiveSum(Array(input.dropFirst()))
     }
 
     // Question 6
@@ -100,10 +122,16 @@ class DSA {
     // traverses it, and returns an array with all the values in the linked list.
     // Assume the linked list starts with 1 as the root node and looks like: 1->9->8->5
     // ex: traverseLinkedList(firstNode) should return [1,9,8,5]
-   
+
 
     func traverseLinkedList( _ inputList: Node) -> [Int] {
-        return []
+        var linkedArr = [Int]()
+        var currentNode = inputList.value
+        linkedArr.append(currentNode)
+        while inputList.next != nil {
+            currentNode = inputList.next!.value
+        }
+        return linkedArr
     }
 
     // Question 7
@@ -120,6 +148,10 @@ class DSA {
     //
 
     func maxDepth(tree: BinaryNode?) -> Int {
-        return 0
+        if tree == nil {
+            return 0
+        } else {
+            return 1 + max(maxDepth(tree: tree!.left), maxDepth(tree: tree!.right))
+        }
     }
 }

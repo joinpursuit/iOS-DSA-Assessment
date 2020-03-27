@@ -60,7 +60,7 @@ class DSATest: XCTestCase {
             var tail: Node?
             
         
-            
+
             
             func append(value: Int) {
                 let newNode = Node(value: value)
