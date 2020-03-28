@@ -46,8 +46,9 @@ class DSA {
     // ex: multiply(x: 5, y: 10) should return 50
 
     func multiply(x: Int, y: Int) -> Int {
+        print(x * y)
         
-        return 0
+        return x * y 
     }
 
     
@@ -56,8 +57,22 @@ class DSA {
     // ex: arraySquare(arr: [1,3,5,8]) should return [1,9,25,64]
 
     func arraySquare(arr:[Int]) -> [Int] {
+        
+        //print(returnSquares(withOriginalArray: arr))
     
-        return []
+        return returnSquares(withOriginalArray: arr)
+    }
+    
+    private func returnSquares(withOriginalArray originalArray: [Int]) -> [Int] {
+        guard originalArray.count > 0 else {return [Int]()}
+        
+        var squaredArray = [Int]()
+        
+        for number in originalArray {
+            squaredArray.append(number * number)
+        }
+        
+        return squaredArray
     }
 
     // Question 3
@@ -67,8 +82,27 @@ class DSA {
     // ex: integerRange(4, 25) should return 19
 
     func integerRange( _ low: Int, _ high: Int) -> Int {
-     
-        return 0
+        
+        var rangeArr = [Int]()
+        
+        for number in low...high {
+            
+            if number <= 10 {
+                
+                if number != 5 && number != -5 {
+                    rangeArr.append(number)
+                }
+                
+            } else {
+                let numberString = Array(String(number))
+                
+                if !numberString.contains("5")  {
+                    rangeArr.append(number)
+                }
+            }
+        }
+        
+        return rangeArr.count
     }
     
     
@@ -80,8 +114,28 @@ class DSA {
     // ex: inputSum([1,3,5,4,2], 2) should return false
 
     func inputSum( _ arr: [Int], _ targetInt: Int) -> Bool {
+        let differences = Array(createDictionary(withArray: arr, andTarget: targetInt).values)
+        for difference in differences {
+            if arr.contains(difference) {
+                return true
+            } else {
+                return false
+            }
+        }
       
         return false
+    }
+    
+    private func createDictionary(withArray arr:[Int], andTarget target: Int) -> [Int: Int]{
+        
+        var differenceDict = [Int: Int]()
+        
+        for number in arr {
+            let difference = target - number
+            differenceDict[number] = difference
+        }
+        
+        return differenceDict
     }
     
     // Question 5
@@ -91,8 +145,19 @@ class DSA {
     // ex: recursiveSum([1,2,3,4,5]) should return 15
 
     func recursiveSum( _ input: [Int]) -> Int {
+        
 
-        return 0
+        return findSum(withInputArr: input)
+    }
+    
+    private func findSum(withInputArr inputArr: [Int]) -> Int {
+        var inputArrDup = inputArr
+        var total = 0
+        
+        while !inputArrDup.isEmpty {
+            total += inputArrDup.popLast()!
+        }
+        return total
     }
 
     // Question 6
@@ -103,8 +168,17 @@ class DSA {
    
 
     func traverseLinkedList( _ inputList: Node) -> [Int] {
-        return []
+        var linkedListValues = [Int]()
+        var rootNode = inputList.next
+        linkedListValues.append(inputList.value)
+        while rootNode != nil {
+            linkedListValues.append(rootNode!.value)
+            rootNode = rootNode?.next
+        }
+        return linkedListValues
     }
+    
+    
 
     // Question 7
     // Given a binary tree, find its maximum depth.
@@ -120,6 +194,19 @@ class DSA {
     //
 
     func maxDepth(tree: BinaryNode?) -> Int {
-        return 0
+        
+        if tree == nil {
+            return 0
+        } else {
+            let leftDepth = maxDepth(tree: tree?.left)
+            let rightDepth = maxDepth(tree: tree?.right)
+            
+            if leftDepth > rightDepth {
+                return leftDepth + 1
+            } else {
+                return rightDepth + 1
+               
+            }
+        }
     }
 }
