@@ -46,8 +46,8 @@ class DSA {
     // ex: multiply(x: 5, y: 10) should return 50
 
     func multiply(x: Int, y: Int) -> Int {
-        
-        return 0
+        let product = x * y
+        return product
     }
 
     
@@ -57,7 +57,8 @@ class DSA {
 
     func arraySquare(arr:[Int]) -> [Int] {
     
-        return []
+        let squareArr = arr.map{$0 * $0}
+        return squareArr
     }
 
     // Question 3
@@ -67,8 +68,15 @@ class DSA {
     // ex: integerRange(4, 25) should return 19
 
     func integerRange( _ low: Int, _ high: Int) -> Int {
-     
-        return 0
+     var nonFiveContaining = 0
+        for num in low ... high {
+            // swift equates -5 % 10 to -5 not 5
+            if abs(num) % 10 != 5 {
+                nonFiveContaining += 1
+            }
+            print(nonFiveContaining)
+        }
+        return nonFiveContaining
     }
     
     
@@ -80,8 +88,21 @@ class DSA {
     // ex: inputSum([1,3,5,4,2], 2) should return false
 
     func inputSum( _ arr: [Int], _ targetInt: Int) -> Bool {
-      
-        return false
+        
+        var pairExists = false
+        var sumDict:[Int : Int] = [:]
+        
+        for num in 0 ..< arr.count {
+            if sumDict[targetInt - arr[num]] != nil {
+                pairExists = true
+            } else {
+                // setting num as value for key to have key value pair, not needed for requested soultion
+                sumDict[arr[num]] = num
+            }
+        }
+        
+ 
+        return pairExists
     }
     
     // Question 5
@@ -91,8 +112,12 @@ class DSA {
     // ex: recursiveSum([1,2,3,4,5]) should return 15
 
     func recursiveSum( _ input: [Int]) -> Int {
-
-        return 0
+        // exit casses for recursion
+        if input.count == 0 {
+            return 0
+        }
+        
+        return input.last! + recursiveSum(Array(input.dropLast()))
     }
 
     // Question 6
@@ -103,7 +128,18 @@ class DSA {
    
 
     func traverseLinkedList( _ inputList: Node) -> [Int] {
-        return []
+        var linkedListValues = [Int]()
+        var currentNode = inputList
+        
+        while currentNode.next != nil {
+            linkedListValues.append(currentNode.value)
+            currentNode = currentNode.next!
+        }
+        // appends the final element of the node
+        linkedListValues.append(currentNode.value)
+        
+        return linkedListValues
+        
     }
 
     // Question 7
@@ -120,6 +156,21 @@ class DSA {
     //
 
     func maxDepth(tree: BinaryNode?) -> Int {
-        return 0
+        var depth : Int 
+        if tree == nil{
+          depth = 0
+        } else {
+              //sub tree
+            let depthLeftSide = maxDepth(tree: tree?.left)
+            let depthRightSide = maxDepth(tree: tree?.right)
+            
+            if depthRightSide > depthLeftSide {
+                depth = depthRightSide + 1
+            } else {
+                depth = depthLeftSide + 1
+            }
+            
+        }
+        return depth
     }
 }
