@@ -47,7 +47,7 @@ class DSA {
 
     func multiply(x: Int, y: Int) -> Int {
         
-        return 0
+        return x*y
     }
 
     
@@ -56,8 +56,10 @@ class DSA {
     // ex: arraySquare(arr: [1,3,5,8]) should return [1,9,25,64]
 
     func arraySquare(arr:[Int]) -> [Int] {
-    
-        return []
+        let squaredArr : [Int] = arr.map { num in
+            return num * num
+        }
+        return squaredArr
     }
 
     // Question 3
@@ -67,8 +69,24 @@ class DSA {
     // ex: integerRange(4, 25) should return 19
 
     func integerRange( _ low: Int, _ high: Int) -> Int {
-     
-        return 0
+        let numRange = low..<high + 1
+        var fiveCount = 0
+        
+        for num in numRange {
+            var val = num
+            while val != 0 {
+                if val % 10 == 5 || val % 10 == -5 {
+                    fiveCount += 1
+                    break
+                }
+                else {
+                    val = val/10
+                    continue
+                }
+            }
+        }
+        
+        return numRange.count - fiveCount
     }
     
     
@@ -80,9 +98,70 @@ class DSA {
     // ex: inputSum([1,3,5,4,2], 2) should return false
 
     func inputSum( _ arr: [Int], _ targetInt: Int) -> Bool {
-      
+        var left = 0
+        var right = arr.count - 1
+        var arrayList = arr
+        mergeSort(array: &arrayList, startIndex: 0, endIndex: arr.count - 1)
+        
+        while left != right {
+            let sum = arrayList[left] + arrayList[right]
+            if sum > targetInt {
+                right -= 1
+            }
+            else if sum < targetInt {
+                left += 1
+            }
+            else {
+                return true
+            }
+        }
+        
         return false
     }
+    
+    func mergeSort<T: Comparable>(array: inout [T], startIndex: Int, endIndex: Int) {
+        if startIndex >= endIndex {
+            return
+        }
+        let middleIndex = (startIndex + endIndex) / 2
+        mergeSort(array: &array, startIndex: startIndex, endIndex: middleIndex)
+        mergeSort(array: &array, startIndex: middleIndex+1, endIndex: endIndex)
+        merge(array: &array, startIndex: startIndex, middleIndex: middleIndex, endIndex: endIndex)
+    }
+    
+    func merge<T: Comparable> (array: inout [T], startIndex: Int, middleIndex: Int, endIndex: Int) {
+        let leftSubarray = Array(array[startIndex...middleIndex])
+        let rightSubarray = Array(array[middleIndex+1...endIndex])
+        
+        var index = startIndex
+        var leftIndex = 0
+        var rightIndex = 0
+        
+        while leftIndex < leftSubarray.count && rightIndex < rightSubarray.count {
+            if leftSubarray[leftIndex] < rightSubarray[rightIndex] {
+                array[index] = leftSubarray[leftIndex]
+                leftIndex += 1
+            }
+            else {
+                array[index] = rightSubarray[rightIndex]
+                rightIndex += 1
+            }
+            index += 1
+        }
+        
+        while leftIndex < leftSubarray.count {
+            array[index] = leftSubarray[leftIndex]
+            index += 1
+            leftIndex += 1
+        }
+        
+        while rightIndex < rightSubarray.count {
+            array[index] = rightSubarray[rightIndex]
+            index += 1
+            rightIndex += 1
+        }
+    }
+    
     
     // Question 5
     // Implement a function that accepts an array of integers as an argument.
@@ -91,8 +170,16 @@ class DSA {
     // ex: recursiveSum([1,2,3,4,5]) should return 15
 
     func recursiveSum( _ input: [Int]) -> Int {
+        if input.count == 1 {
+            return input[0]
+        }
+        var arr = input
+        let sum = input[0] + input[1]
+        
+        arr[0] = sum
+        arr.remove(at: 1)
 
-        return 0
+        return recursiveSum(arr)
     }
 
     // Question 6
@@ -103,7 +190,18 @@ class DSA {
    
 
     func traverseLinkedList( _ inputList: Node) -> [Int] {
-        return []
+        var arrayList: [Int] = []
+        var list : Node? = inputList
+
+        repeat {
+            guard let val = list?.value else {
+                return arrayList
+            }
+            arrayList.append(val)
+            list = list?.next
+        } while list != nil
+        
+          return arrayList
     }
 
     // Question 7
@@ -120,6 +218,14 @@ class DSA {
     //
 
     func maxDepth(tree: BinaryNode?) -> Int {
-        return 0
+        
+        if tree == nil {
+            return 0
+        }
+        else {
+            let leftSide = maxDepth(tree: tree?.left)
+            let rightSide = maxDepth(tree: tree?.right)
+            return max(leftSide, rightSide) + 1
+        }
     }
 }
