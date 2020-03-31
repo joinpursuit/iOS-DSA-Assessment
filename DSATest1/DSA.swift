@@ -47,7 +47,7 @@ class DSA {
 
     func multiply(x: Int, y: Int) -> Int {
         
-        return 0
+        return x * y 
     }
 
     
@@ -56,8 +56,8 @@ class DSA {
     // ex: arraySquare(arr: [1,3,5,8]) should return [1,9,25,64]
 
     func arraySquare(arr:[Int]) -> [Int] {
-    
-        return []
+       
+        return arr.map({ Int(pow(Double($0), 2.0))})
     }
 
     // Question 3
@@ -67,9 +67,15 @@ class DSA {
     // ex: integerRange(4, 25) should return 19
 
     func integerRange( _ low: Int, _ high: Int) -> Int {
-     
-        return 0
+        var range = low...high
+        if !range.contains(5) {
+            
+        }
+        
+        return range.count
     }
+
+
     
     
     // Question 4
@@ -80,8 +86,15 @@ class DSA {
     // ex: inputSum([1,3,5,4,2], 2) should return false
 
     func inputSum( _ arr: [Int], _ targetInt: Int) -> Bool {
-      
-        return false
+      var dict = [Int: Int]()
+          for i in 0..<arr.count {
+              if dict.keys.contains(targetInt - arr[i]) {
+                  return true
+              } else if !dict.keys.contains(targetInt - arr[i]) {
+                   return false
+           }
+       }
+        return true
     }
     
     // Question 5
@@ -91,8 +104,10 @@ class DSA {
     // ex: recursiveSum([1,2,3,4,5]) should return 15
 
     func recursiveSum( _ input: [Int]) -> Int {
-
-        return 0
+        guard  !input.isEmpty else {
+            return 0
+        }
+        return input.first! + recursiveSum(Array(input.dropFirst()))
     }
 
     // Question 6
@@ -101,12 +116,56 @@ class DSA {
     // Assume the linked list starts with 1 as the root node and looks like: 1->9->8->5
     // ex: traverseLinkedList(firstNode) should return [1,9,8,5]
    
-
     func traverseLinkedList( _ inputList: Node) -> [Int] {
+        
+         class LinkedList<T> {
+            var head: Node?
+            var isEmpty: Bool { //if there is no head
+            return head == nil
+          }
+
+           var first: Node? {
+            return head
+          }
+        
+        var last: Node? { // to keep track  of last node
+           guard var node = head else {
+            return nil
+          }
+        
+          while let next = node.next {
+            node = next
+          }
+          return node
+        }
+        public var print: [String] {
+            var bracket = "["
+            var node = head
+            while node != nil {
+            bracket += "\(node!.value)"
+                node = node!.next
+            if node != nil { bracket += ", " }
+                       }
+            return [bracket + "]"]
+        }
+         var count: [Int] {
+          guard var node = head else {
+            return [0]
+          }
+        
+          var count = [1]
+          while let next = node.next {
+            node = next
+            count += [1]
+          }
+          return count
+        }
+        
+    }
         return []
     }
-
-    // Question 7
+    
+//     Question 7
     // Given a binary tree, find its maximum depth.
     // The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
     // Note: A leaf is a node with no children.
@@ -120,6 +179,15 @@ class DSA {
     //
 
     func maxDepth(tree: BinaryNode?) -> Int {
-        return 0
+      if tree == nil{
+          return 0
+      }
+        var maxLeft  = maxDepth(tree: tree?.left)
+        var maxRight = maxDepth(tree: tree?.right)
+
+      if maxLeft > maxRight{
+          return maxLeft + 1
+      }
+      return maxRight + 1
     }
 }
