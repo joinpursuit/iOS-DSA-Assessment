@@ -46,8 +46,8 @@ class DSA {
     // ex: multiply(x: 5, y: 10) should return 50
 
     func multiply(x: Int, y: Int) -> Int {
-        
-        return 0
+        var multi = x * y
+        return multi
     }
 
     
@@ -56,8 +56,12 @@ class DSA {
     // ex: arraySquare(arr: [1,3,5,8]) should return [1,9,25,64]
 
     func arraySquare(arr:[Int]) -> [Int] {
+        var newArr = [Int]()
+        for i in arr {
+            newArr.append(i * i)
+        }
     
-        return []
+        return newArr
     }
 
     // Question 3
@@ -67,8 +71,26 @@ class DSA {
     // ex: integerRange(4, 25) should return 19
 
     func integerRange( _ low: Int, _ high: Int) -> Int {
-     
-        return 0
+        var arr = [Int]()
+
+        for i in low...high {
+
+            var num = i
+            while num > 0 {
+                if num % 10  != 5 {
+                    if num < 10 {
+                        arr.append(i)
+                    }
+                    num = num / 10
+                    print(num)
+                } else {
+                    break
+                }
+            }
+        }
+
+
+        return arr.count
     }
     
     
