@@ -102,6 +102,22 @@ class DSA {
     // ex: inputSum([1,3,5,4,2], 2) should return false
 
     func inputSum( _ arr: [Int], _ targetInt: Int) -> Bool {
+        
+        var pointer = Int()
+        
+        for i in arr {
+           
+            for j in arr {
+                if pointer <= 1 {
+                    continue
+                }
+                if pointer + j == targetInt {
+                    print(pointer, j)
+                    return true
+                }
+            }
+            pointer = i
+        }
       
         return false
     }
