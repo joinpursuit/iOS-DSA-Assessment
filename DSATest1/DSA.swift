@@ -129,8 +129,27 @@ class DSA {
     // ex: recursiveSum([1,2,3,4,5]) should return 15
 
     func recursiveSum( _ input: [Int]) -> Int {
-
-        return 0
+        var arr = input
+        // print(arr)
+        
+        let x = arr[0]
+        let y = arr[1]
+        var z = 0
+        
+        if arr.count > 2 {
+            z = x + y
+            arr.append(z)
+            arr.removeFirst(2)
+            
+        } else {
+          z = x + y
+            arr.append(z)
+            arr.removeFirst(2)
+            print(z)
+            return z
+        }
+        // print(arr)
+        return recursiveSum(arr)
     }
 
     // Question 6
