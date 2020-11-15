@@ -56,8 +56,13 @@ class DSA {
     // ex: arraySquare(arr: [1,3,5,8]) should return [1,9,25,64]
 
     func arraySquare(arr:[Int]) -> [Int] {
-    
-        return []
+        var squaredArr = [Int]()
+        
+        for num in arr {
+            let squared = num * num
+            squaredArr.append(squared)
+        }
+        return squaredArr
     }
 
     // Question 3
