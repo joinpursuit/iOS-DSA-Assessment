@@ -82,7 +82,6 @@ class DSA {
                         arr.append(i)
                     }
                     num = num / 10
-                    print(num)
                 } else {
                     break
                 }
@@ -189,6 +188,17 @@ class DSA {
     //
 
     func maxDepth(tree: BinaryNode?) -> Int {
-        return 0
+        guard let root = tree else {
+            return 0
+        }
+     
+        if root.left == nil {
+            return maxDepth(tree: root.right) + 1
+        }
+        if root.right == nil {
+            return maxDepth(tree: root.left) + 1
+        }
+        
+        return max(maxDepth(tree: root.left), maxDepth(tree: root.right)) + 1
     }
 }
