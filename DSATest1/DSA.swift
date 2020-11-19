@@ -46,8 +46,8 @@ class DSA {
     // ex: multiply(x: 5, y: 10) should return 50
 
     func multiply(x: Int, y: Int) -> Int {
-        
-        return 0
+        var multi = x * y
+        return multi
     }
 
     
@@ -56,8 +56,12 @@ class DSA {
     // ex: arraySquare(arr: [1,3,5,8]) should return [1,9,25,64]
 
     func arraySquare(arr:[Int]) -> [Int] {
+        var newArr = [Int]()
+        for i in arr {
+            newArr.append(i * i)
+        }
     
-        return []
+        return newArr
     }
 
     // Question 3
@@ -67,8 +71,25 @@ class DSA {
     // ex: integerRange(4, 25) should return 19
 
     func integerRange( _ low: Int, _ high: Int) -> Int {
-     
-        return 0
+        var arr = [Int]()
+
+        for i in low...high {
+
+            var num = i
+            while num > 0 {
+                if num % 10  != 5 {
+                    if num < 10 {
+                        arr.append(i)
+                    }
+                    num = num / 10
+                } else {
+                    break
+                }
+            }
+        }
+
+
+        return arr.count
     }
     
     
@@ -80,6 +101,22 @@ class DSA {
     // ex: inputSum([1,3,5,4,2], 2) should return false
 
     func inputSum( _ arr: [Int], _ targetInt: Int) -> Bool {
+        
+        var pointer = Int()
+        
+        for i in arr {
+           
+            for j in arr {
+                if pointer <= 1 {
+                    continue
+                }
+                if pointer + j == targetInt {
+                    print(pointer, j)
+                    return true
+                }
+            }
+            pointer = i
+        }
       
         return false
     }
@@ -91,8 +128,27 @@ class DSA {
     // ex: recursiveSum([1,2,3,4,5]) should return 15
 
     func recursiveSum( _ input: [Int]) -> Int {
-
-        return 0
+        var arr = input
+        // print(arr)
+        
+        let x = arr[0]
+        let y = arr[1]
+        var z = 0
+        
+        if arr.count > 2 {
+            z = x + y
+            arr.append(z)
+            arr.removeFirst(2)
+            
+        } else {
+          z = x + y
+            arr.append(z)
+            arr.removeFirst(2)
+            print(z)
+            return z
+        }
+        // print(arr)
+        return recursiveSum(arr)
     }
 
     // Question 6
@@ -103,7 +159,19 @@ class DSA {
    
 
     func traverseLinkedList( _ inputList: Node) -> [Int] {
-        return []
+        var linkedArr = [Int]()
+        var node = inputList
+        
+        while node != nil {
+            linkedArr.append(node.value)
+            if node.next != nil {
+            node = node.next!
+            } else {
+                break
+            }
+        }
+
+        return linkedArr
     }
 
     // Question 7
@@ -120,6 +188,17 @@ class DSA {
     //
 
     func maxDepth(tree: BinaryNode?) -> Int {
-        return 0
+        guard let root = tree else {
+            return 0
+        }
+     
+        if root.left == nil {
+            return maxDepth(tree: root.right) + 1
+        }
+        if root.right == nil {
+            return maxDepth(tree: root.left) + 1
+        }
+        
+        return max(maxDepth(tree: root.left), maxDepth(tree: root.right)) + 1
     }
 }
