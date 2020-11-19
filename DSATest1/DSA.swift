@@ -160,7 +160,19 @@ class DSA {
    
 
     func traverseLinkedList( _ inputList: Node) -> [Int] {
-        return []
+        var linkedArr = [Int]()
+        var node = inputList
+        
+        while node != nil {
+            linkedArr.append(node.value)
+            if node.next != nil {
+            node = node.next!
+            } else {
+                break
+            }
+        }
+
+        return linkedArr
     }
 
     // Question 7
