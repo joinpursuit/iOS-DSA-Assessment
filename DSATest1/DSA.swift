@@ -47,7 +47,7 @@ class DSA {
 
     func multiply(x: Int, y: Int) -> Int {
         
-        return 0
+        return x * y 
     }
 
     
@@ -56,8 +56,13 @@ class DSA {
     // ex: arraySquare(arr: [1,3,5,8]) should return [1,9,25,64]
 
     func arraySquare(arr:[Int]) -> [Int] {
-    
-        return []
+        var squaredArr = [Int]()
+        
+        for number in arr {
+            squaredArr.append(number * number)
+        }
+        
+        return squaredArr
     }
 
     // Question 3
