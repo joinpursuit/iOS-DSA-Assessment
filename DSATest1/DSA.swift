@@ -72,8 +72,20 @@ class DSA {
     // ex: integerRange(4, 25) should return 19
 
     func integerRange( _ low: Int, _ high: Int) -> Int {
-     
-        return 0
+        var resultArr = [String]()
+        
+        for number in low...high {
+            var numberStrArr = [String]()
+            numberStrArr.append(String(number))
+            print(numberStrArr)
+            
+            for element in numberStrArr {
+                if !element.contains("5") {
+                    resultArr.append(element)
+                }
+            }
+        }
+        return resultArr.count
     }
     
     
@@ -85,8 +97,16 @@ class DSA {
     // ex: inputSum([1,3,5,4,2], 2) should return false
 
     func inputSum( _ arr: [Int], _ targetInt: Int) -> Bool {
-      
-        return false
+        var targetedNum = false
+        
+        for i in 0..<arr.count {
+            for j in 1..<arr.count {
+                if arr[i] + arr[j] == targetInt {
+                    targetedNum = true
+                }
+            }
+        }
+        return targetedNum
     }
     
     // Question 5
@@ -96,8 +116,11 @@ class DSA {
     // ex: recursiveSum([1,2,3,4,5]) should return 15
 
     func recursiveSum( _ input: [Int]) -> Int {
-
-        return 0
+        
+        guard !input.isEmpty else { return 0}
+        var newNumArr = input
+        let sumAllInts = newNumArr.remove(at: 0)
+        return sumAllInts + recursiveSum(newNumArr)
     }
 
     // Question 6
