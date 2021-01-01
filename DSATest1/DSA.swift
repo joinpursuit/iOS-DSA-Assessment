@@ -95,10 +95,10 @@ class DSA {
     // summed up to the input integer.
     // ex: inputSum([1,3,5,4,2], 7) should return true
     // ex: inputSum([1,3,5,4,2], 2) should return false
-
+    
     func inputSum( _ arr: [Int], _ targetInt: Int) -> Bool {
         var targetedNum = false
-        
+
         for i in 0..<arr.count {
             for j in 1..<arr.count {
                 if arr[i] + arr[j] == targetInt {
@@ -117,10 +117,8 @@ class DSA {
 
     func recursiveSum( _ input: [Int]) -> Int {
         
-        guard !input.isEmpty else { return 0}
-        var newNumArr = input
-        let sumAllInts = newNumArr.remove(at: 0)
-        return sumAllInts + recursiveSum(newNumArr)
+        guard !input.isEmpty else { return 0 }
+        return input.first! + recursiveSum(Array(input.dropFirst()))
     }
 
     // Question 6
@@ -131,7 +129,18 @@ class DSA {
    
 
     func traverseLinkedList( _ inputList: Node) -> [Int] {
-        return []
+        var resultArray = [Int]()
+        var currentNode = inputList
+        
+        while currentNode != nil {
+            resultArray.append(currentNode.value)
+            if currentNode.next != nil {
+                currentNode = currentNode.next!
+            } else {
+                break
+            }
+        }
+        return resultArray
     }
 
     // Question 7
