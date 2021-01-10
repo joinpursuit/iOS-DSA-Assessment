@@ -154,9 +154,21 @@ class DSA {
     //   2   20
     //      /  \
     //     7   25
-    //
-
+    
     func maxDepth(tree: BinaryNode?) -> Int {
-        return 0
+        guard let root = tree else {
+            return 0
+        }
+        
+        var leftHeight = 0
+        var rightHeight = 0
+        
+        if let leftChild = root.left {
+            leftHeight = maxDepth(tree: leftChild)
+        }
+        if let rightChild = root.right {
+            rightHeight = maxDepth(tree: rightChild)
+        }
+        return 1 + max(leftHeight, rightHeight)
     }
 }
