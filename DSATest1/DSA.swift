@@ -47,7 +47,7 @@ class DSA {
 
     func multiply(x: Int, y: Int) -> Int {
         
-        return 0
+        return x * y 
     }
 
     
@@ -56,8 +56,13 @@ class DSA {
     // ex: arraySquare(arr: [1,3,5,8]) should return [1,9,25,64]
 
     func arraySquare(arr:[Int]) -> [Int] {
-    
-        return []
+        var squaredArr = [Int]()
+        
+        for number in arr {
+            squaredArr.append(number * number)
+        }
+        
+        return squaredArr
     }
 
     // Question 3
@@ -67,8 +72,20 @@ class DSA {
     // ex: integerRange(4, 25) should return 19
 
     func integerRange( _ low: Int, _ high: Int) -> Int {
-     
-        return 0
+        var resultArr = [String]()
+        
+        for number in low...high {
+            var numberStrArr = [String]()
+            numberStrArr.append(String(number))
+            print(numberStrArr)
+            
+            for element in numberStrArr {
+                if !element.contains("5") {
+                    resultArr.append(element)
+                }
+            }
+        }
+        return resultArr.count
     }
     
     
@@ -78,10 +95,18 @@ class DSA {
     // summed up to the input integer.
     // ex: inputSum([1,3,5,4,2], 7) should return true
     // ex: inputSum([1,3,5,4,2], 2) should return false
-
+    
     func inputSum( _ arr: [Int], _ targetInt: Int) -> Bool {
-      
-        return false
+        var targetedNum = false
+
+        for i in 0..<arr.count {
+            for j in 1..<arr.count {
+                if arr[i] + arr[j] == targetInt {
+                    targetedNum = true
+                }
+            }
+        }
+        return targetedNum
     }
     
     // Question 5
@@ -91,8 +116,9 @@ class DSA {
     // ex: recursiveSum([1,2,3,4,5]) should return 15
 
     func recursiveSum( _ input: [Int]) -> Int {
-
-        return 0
+        
+        guard !input.isEmpty else { return 0 }
+        return input.first! + recursiveSum(Array(input.dropFirst()))
     }
 
     // Question 6
@@ -103,7 +129,18 @@ class DSA {
    
 
     func traverseLinkedList( _ inputList: Node) -> [Int] {
-        return []
+        var resultArray = [Int]()
+        var currentNode = inputList
+        
+        while currentNode != nil {
+            resultArray.append(currentNode.value)
+            if currentNode.next != nil {
+                currentNode = currentNode.next!
+            } else {
+                break
+            }
+        }
+        return resultArray
     }
 
     // Question 7
@@ -117,9 +154,21 @@ class DSA {
     //   2   20
     //      /  \
     //     7   25
-    //
-
+    
     func maxDepth(tree: BinaryNode?) -> Int {
-        return 0
+        guard let root = tree else {
+            return 0
+        }
+        
+        var leftHeight = 0
+        var rightHeight = 0
+        
+        if let leftChild = root.left {
+            leftHeight = maxDepth(tree: leftChild)
+        }
+        if let rightChild = root.right {
+            rightHeight = maxDepth(tree: rightChild)
+        }
+        return 1 + max(leftHeight, rightHeight)
     }
 }
