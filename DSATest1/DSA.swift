@@ -46,8 +46,8 @@ class DSA {
     // ex: multiply(x: 5, y: 10) should return 50
 
     func multiply(x: Int, y: Int) -> Int {
-        
-        return 0
+        let sum = x * y
+        return sum
     }
 
     
@@ -56,8 +56,12 @@ class DSA {
     // ex: arraySquare(arr: [1,3,5,8]) should return [1,9,25,64]
 
     func arraySquare(arr:[Int]) -> [Int] {
-    
-        return []
+        var arrSquare = [Int]()
+        for num in arr {
+            let squared = num * num
+            arrSquare.append(squared)
+        }
+        return arrSquare
     }
 
     // Question 3
@@ -67,8 +71,14 @@ class DSA {
     // ex: integerRange(4, 25) should return 19
 
     func integerRange( _ low: Int, _ high: Int) -> Int {
-     
-        return 0
+        var numbers: Int = 0
+        
+        for number in low...high {
+            numbers.append(number) {
+                numbers += 1
+            }
+        }
+        return numbers
     }
     
     
@@ -80,7 +90,14 @@ class DSA {
     // ex: inputSum([1,3,5,4,2], 2) should return false
 
     func inputSum( _ arr: [Int], _ targetInt: Int) -> Bool {
-      
+        
+        for i in 0..<arr.count{
+            for j in i+1..<arr.count {
+                if arr[i] + arr[j] == targetInt {
+                   return true
+                }
+            }
+        }
         return false
     }
     
@@ -92,7 +109,9 @@ class DSA {
 
     func recursiveSum( _ input: [Int]) -> Int {
 
-        return 0
+        guard !input.isEmpty else {return 0}
+        
+        return input.first! + recursiveSum(Array(input.dropFirst()))
     }
 
     // Question 6
@@ -120,6 +139,32 @@ class DSA {
     //
 
     func maxDepth(tree: BinaryNode?) -> Int {
-        return 0
+ // class NOde<T> {
+    //var value: T
+    // var lftChild: Node?
+    // var rightChild: Node?
+    
+    // init(value: T) {
+    //    self.value = value
+    // }
+    // }
+     var sumLeft = 0
+     var   sumRight = 0
+        if let tree = tree {
+           sumLeft = 1
+            sumRight = 1
+            if let left = tree.left {
+                sumLeft = 1 + maxDepth(tree: left)
+                    
+                }
+            if let right = tree.right {
+                sumRight = 1 + maxDepth(tree: right)
+            }
+    }
+        
+        
+        return max(sumLeft, sumRight)
+        
+        
     }
 }
