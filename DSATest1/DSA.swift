@@ -30,6 +30,31 @@ class BinaryNode {
     }
 }
 
+struct Stack {
+    private var arr: [Int] = []
+    
+    mutating func push(_ int: Int) {
+        arr.append(int)
+    }
+    
+    mutating func pop() -> Int? {
+        return arr.popLast()
+    }
+    
+    func peek() -> Int? {
+        return arr.last
+    }
+    
+    func count() -> Int {
+        return arr.count
+    }
+}
+
+extension BinaryInteger {
+    var digits: [Int] {
+        return String(describing: self).compactMap { Int(String($0)) }
+    }
+}
 //*********************************
 
 
@@ -47,7 +72,7 @@ class DSA {
 
     func multiply(x: Int, y: Int) -> Int {
         
-        return 0
+        return x * y
     }
 
     
@@ -56,8 +81,8 @@ class DSA {
     // ex: arraySquare(arr: [1,3,5,8]) should return [1,9,25,64]
 
     func arraySquare(arr:[Int]) -> [Int] {
-    
-        return []
+        
+        return arr.map {$0 * $0}
     }
 
     // Question 3
@@ -67,8 +92,17 @@ class DSA {
     // ex: integerRange(4, 25) should return 19
 
     func integerRange( _ low: Int, _ high: Int) -> Int {
+        
+        var stack = Stack()
+        
+        for int in low...high {
+            let intArr = int.digits
+            if !intArr.contains(5) {
+                stack.push(int)
+            }
+        }
      
-        return 0
+        return stack.count()
     }
     
     
@@ -80,7 +114,22 @@ class DSA {
     // ex: inputSum([1,3,5,4,2], 2) should return false
 
     func inputSum( _ arr: [Int], _ targetInt: Int) -> Bool {
-      
+        var array = arr
+        
+        var additive = array[0]
+        
+        array.remove(at: 0)
+        
+        while array.isEmpty == false {
+            for num in array {
+                if num + additive == targetInt {
+                    return true
+                }
+            }
+            additive = array[0]
+            array.remove(at: 0)
+        }
+        
         return false
     }
     
@@ -91,8 +140,21 @@ class DSA {
     // ex: recursiveSum([1,2,3,4,5]) should return 15
 
     func recursiveSum( _ input: [Int]) -> Int {
+        
+        var arr = input
+        var sum = arr[0]
+        
+        if arr.count != 1 {
+            sum = arr[0] + arr[1]
+        } else {
+            return sum
+        }
 
-        return 0
+        arr.remove(at: 0)
+        arr.remove(at: 0)
+        arr.insert(sum, at: 0)
+
+        return recursiveSum(arr)
     }
 
     // Question 6
@@ -103,7 +165,17 @@ class DSA {
    
 
     func traverseLinkedList( _ inputList: Node) -> [Int] {
-        return []
+        var linLisArr: [Int] = []
+        var point = inputList
+        
+        while point.next != nil {
+            linLisArr.append(point.value)
+            point = point.next!
+            
+        }
+        linLisArr.append(point.value)
+
+        return linLisArr
     }
 
     // Question 7
@@ -120,6 +192,14 @@ class DSA {
     //
 
     func maxDepth(tree: BinaryNode?) -> Int {
-        return 0
+        guard let _ = tree else {
+            return 0
+        }
+        
+        let left = maxDepth(tree: tree?.left)
+        let right = maxDepth(tree: tree?.right)
+
+        
+        return max(left, right) + 1
     }
 }
